@@ -11,5 +11,9 @@ def weekly():
 def server_static(filename):
     return bottle.static_file(filename, root='css/')
 
+@bottle.route('/js/:filename')
+def server_static(filename):
+    return bottle.static_file(filename, root='js/')
 
-bottle.run(host='blr-lin-484', port=8080)
+
+bottle.run(host='localhost', port=8080)

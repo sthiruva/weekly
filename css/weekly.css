@@ -5,6 +5,12 @@
     font-size: 14;
 }
 
+.page {
+    width: 1024;
+    margin: auto;
+
+}
+
 #header-ul {
     list-style: none;
     padding-top: 5px;
@@ -37,11 +43,9 @@
 }
 
 .content {
-    border: 1px #000 solid;
     padding: 5px;
     margin-left: 5px;
     margin-right: 5px;
-    min-height: 300px;
 }
 
 .clear {
@@ -49,7 +53,10 @@
 }
 
 .row {
+    float: left;
     border: 1px solid black;
+    display: none;
+    margin-top: 1px;
 }
 
 .highlight {
@@ -65,9 +72,33 @@
 .progress-ta {
         width: 600px;
         height: 80px;
-        border: 3px solid #cccccc;
+        border: 1px solid #cccccc;
         font-family: Tahoma, sans-serif;
         background-image: url(bg.gif);
         background-position: bottom right;
         background-repeat: no-repeat;
+        color: #757575
+}
+
+.rag {
+    min-height: 20px;
+    min-width:  50px;
+    background: red;
+}
+
+.report-table-footer {
+    margin-top: 5px;
+}
+
+#submit-report {
+    border: 1px red solid;
+    float: right;
+    padding: 5px;
+}
+
+#add-row {
+    border: 1px #006e6e solid;
+    background: #d6ffff;
+    float: left;
+    padding: 5px;
 }
