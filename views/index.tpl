@@ -1,15 +1,19 @@
 %include header
 <div id="report-table">
 </div>
-
+<div class="clear"></div>
 <div id="hiddenrow" class="row">
     <div class='highlight'> 
-        <h1> RAG</h1>
         <div class="rag"></div>
-        <h1> Highlight</h1>
-        <input type="checkbox" />
-        <h1> Milestone </h1>
-        <select> </select>
+        <hr/>
+        <input type ="text" name="hours" placeholder="Hours"/>
+        <div class="clear"></div>
+        <input type="checkbox" title="Highlight"/>
+        <div class="clear"></div>
+        <select>
+        	<option>Milestone 1</option>
+        	<option>Milestone 2</option> 
+        </select>
     </div>
     <div>
         <div class='progress'> 
@@ -24,7 +28,9 @@
 </div>
 <div class="clear"></div>
 <div class="report-table-footer">
-    <div id='add-row'>Add Row</div>
-    <div id='submit-report'>Submit Report</div>
+    <div id='add-row' class="button">Add Row</div>
+    <div id='submit-report' class="button">Submit Report</div>
+    <div class="clear"></div>
 </div>
+
 %include footer

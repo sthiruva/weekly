@@ -11,7 +11,8 @@
 
 <ul id="header-ul">
     <li id="list-selected"> <a> Weekly </a></li>
-    <li > <a> Older weeklies </a></li>
+    <li> <a> Older weeklies </a></li>
+    <li> <a> Settings </a></li>
 </ul>
 
 <div class="clear"></div>
