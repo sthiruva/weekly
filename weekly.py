@@ -15,5 +15,8 @@ def server_static(filename):
 def server_static(filename):
     return bottle.static_file(filename, root='js/')
 
+@bottle.route('/fonts/:filename')
+def server_static(filename):
+    return bottle.static_file(filename, root='fonts/')
 
 bottle.run(host='localhost', port=8080)
