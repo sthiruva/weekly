@@ -145,7 +145,7 @@ hr {
     margin: 10px auto;
     text-align: center;
 }
-input[type="text"] {
+.hours input[type="text"] {
     font-family:'SimpleSRegular';
     padding:15px 0;
     text-align:center;
@@ -230,4 +230,83 @@ div.help {
 
 div.selected {
     display: block;
+}
+
+.ms-settings {
+    margin: 17px 10px 10px 25px;
+}
+
+#ms-select {
+    width: 60%;
+    border: 1px solid #D29F00;
+    resize: none;
+    height: 100px;
+    padding: 5px 10px;
+    background: #CCC;
+    font-weight: bold;
+}
+
+#ms-input {
+    margin-top: 3px;
+    width: 420px;
+    float:left;
+    border: 1px solid #D29F00;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#ms-add {
+    float: left;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+#pc-select {
+    width: 60%;
+    border: 1px solid #D29F00;
+    resize: none;
+    height: 100px;
+    padding: 5px 10px;
+    background: #CCC;
+    font-weight: bold;
+}
+
+#pc-input {
+    margin-top: 3px;
+    width: 393px;
+    float:left;
+    border: 1px solid #D29F00;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#pc-add {
+    float: left;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+#email-select {
+    width: 60%;
+    border: 1px solid #D29F00;
+    resize: none;
+    height: 100px;
+    padding: 5px 10px;
+    background: #CCC;
+    font-weight: bold;
+}
+
+#email-input {
+    margin-top: 3px;
+    width: 426px;
+    float:left;
+    border: 1px solid #D29F00;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#email-add {
+    float: left;
+    margin-left: 3px;
+    margin-top: 3px;
 }

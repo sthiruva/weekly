@@ -1,5 +1,5 @@
 %include header
-<div class='tab weekly selected'>
+<div class='tab weekly'>
     <div id="report-table">
     </div>
     <div class="clear"></div>
@@ -45,7 +45,33 @@
 <div class='tab older-weekly'>
 </div>
 
-<div class='tab settings'>
+<div class='tab settings selected'>
+    <div class='ms-settings'>
+        <h1> MileStones</h1>
+        <select id="ms-select" title="Add your milestones" size=3></select>
+        <div class="clear"></div>
+        <input type="text" id='ms-input'> </input>
+        <div class="button" id="ms-add">Add Milestone</div>
+        <div class="clear"></div>
+    </div>
+
+    <div class='ms-settings'>
+        <h1> Add Project codes of project you are working on</h1>
+        <select id="pc-select" title="Project Codes" size=3></select>
+        <div class="clear"></div>
+        <input type="text" id='pc-input'> </input>
+        <div class="button" id="pc-add">Add Project Code</div>
+        <div class="clear"></div>
+    </div>
+
+    <div class='ms-settings'>
+        <h1> Add Email ids of people who you want to send the Weekly to</h1>
+        <select id="email-select" title="Project Codes" size=3></select>
+        <div class="clear"></div>
+        <input type="text" id='email-input'> </input>
+        <div class="button" id="email-add">Add Email ids</div>
+        <div class="clear"></div>
+    </div>
 </div>
 
 <div class='tab help'>
