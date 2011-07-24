@@ -29,18 +29,17 @@
 #header-ul li a {
     display: block;
     padding: 7px 14px;
+    cursor: pointer;
 }
 
-#header-ul #list-selected {
-	border: 1px solid #D29F00;
+#header-ul .selected {
+    border: 1px solid #D29F00;
     background: #f6e6b4;
-	
 }
 
-.content {
-    
+.tab {
+    display:none;
 }
-
 
 #report-table {
 	background: #ccc;
@@ -66,35 +65,41 @@
     margin-left: 10px;
     border: 1px solid #D29F00;
     margin: 5px 20px;
+	border-radius: 5px;
 }
 
 .report {
     float: left;
     width: 60%;
+	margin: 17px 10px 10px 25px;
 }
 
 .progress {
     float: left;
-    padding: 5px;
+    margin: 5px 0;
     width: 100%;
 }
 
+.project {
+    padding: 2px 10px 2px 0;
+    width: 100px;
+}
 .progress-ta {
-        border: 1px solid #cccccc;
-        font-family: Tahoma, sans-serif;
-        background-image: url(bg.gif);
-        background-position: bottom right;
-        background-repeat: no-repeat;
+        border: 1px solid #d29f00;
         color: #757575;
         width: 100%;
+		padding: 5px;
+		resize: none;
+		height: 65px;
+		border-radius: 5px;
 }
 
 .rag {
     background: none repeat scroll 0 0 red;
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 8px;
     height: 48px;
-    width: 48px;
-    margin: auto;
+    width: 100px;
+    margin: 10px auto;
 }
 
 .highlight-on {
@@ -102,6 +107,7 @@
     margin-top: 10px;
     font-weight: bold;
     border: 1px solid #315D0E;
+	border-radius: 5px;
     background: #a9db80; /* Old browsers */
     background: -moz-linear-gradient(top, #a9db80 0%, #96c56f 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9db80), color-stop(100%,#96c56f)); /* Chrome,Safari4+ */
@@ -117,6 +123,7 @@
     margin-top: 10px;
     font-weight: bold;
     border: 1px solid black;
+	border-radius: 5px;
     background: #cedce7; /* Old browsers */
     background: -moz-linear-gradient(top, #cedce7 0%, #596a72 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cedce7), color-stop(100%,#596a72)); /* Chrome,Safari4+ */
@@ -139,21 +146,23 @@ hr {
     text-align: center;
 }
 input[type="text"] {
-    font-family:LCDPHONE;
+    font-family:'SimpleSRegular';
     padding:15px 0;
     text-align:center;
-    width:50px;
+    width:100;
     height:50px;
+    border-radius: 8px;
+    border: 1px solid #d29f00;
 }
 
 input[type="checkbox"] {
 	margin: 10px 30px;
 }
 
-select {
+.milestones {
     float: left;
-    margin: 5px;
     width: 100%;
+	padding: 2px 10px 2px 0;
 }
 #submit-report {
     float: right;
@@ -180,5 +189,45 @@ select {
 	cursor: pointer;
 }
 
-@font-face { font-family: LCDPHONE; src: url('/fonts/LCDPHONE.ttf'); } 
+@font-face {
+    font-family: 'SimpleSRegular';
+    src: url('/fonts/simple_s-webfont.eot');
+    src: url('/fonts/simple_s-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/simple_s-webfont.woff') format('woff'),
+         url('/fonts/simple_s-webfont.ttf') format('truetype'),
+         url('/fonts/simple_s-webfont.svg#SimpleSRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 
+}
+
+div.weekly {
+}
+
+div.older-weekly {
+    min-height: 100px;
+    background-color: #F6E6B4;
+    border: 1px solid #D29F00;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+
+div.settings {
+    min-height: 100px;
+    background-color: #F6E6B4;
+    border: 1px solid #D29F00;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+
+div.help {
+    min-height: 100px;
+    background-color: #F6E6B4;
+    border: 1px solid #D29F00;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+
+div.selected {
+    display: block;
+}
