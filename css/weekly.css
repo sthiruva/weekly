@@ -261,12 +261,20 @@ div.selected {
     margin-top: 3px;
 }
 
+#ms-del {
+    float: left;
+    margin-left: 3px;
+    margin-top: 3px;
+    display: none;
+    width: 109px;
+}
+
 #pc-select {
     width: 60%;
     border: 1px solid #D29F00;
     resize: none;
     height: 100px;
-    padding: 5px 10px;
+    padding: 5px 2px;
     background: #CCC;
     font-weight: bold;
 }
@@ -276,7 +284,7 @@ div.selected {
     width: 393px;
     float:left;
     border: 1px solid #D29F00;
-    padding: 10px;
+    padding: 10px 2px;
     font-weight: bold;
 }
 
@@ -285,6 +293,15 @@ div.selected {
     margin-left: 3px;
     margin-top: 3px;
 }
+
+#pc-del {
+    float: left;
+    margin-left: 3px;
+    margin-top: 3px;
+    display: none;
+    width: 137px;
+}
+
 
 #email-select {
     width: 60%;
@@ -309,4 +326,11 @@ div.selected {
     float: left;
     margin-left: 3px;
     margin-top: 3px;
+}
+
+#email-del {
+    float: left;
+    margin-left: 3px;
+    margin-top: 3px;
+    display: none;
 }

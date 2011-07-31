@@ -3,9 +3,14 @@ import datetime
 
 bottle.debug(True)
 
-@bottle.route('/weekly')
-def weekly():
+@bottle.route('/weekly/:uname')
+def weekly(uname):
     return bottle.template('index')
+
+@bottle.route('/weekly/:uname/addpc')
+def addpc(uname):
+    return uname
+
 
 @bottle.route('/css/:filename')
 def server_static(filename):

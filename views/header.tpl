@@ -1,9 +1,9 @@
 <html>
 <head>
 <title> Weekly Report </title>
-<link rel="stylesheet" href="css/weekly.css">
-<script type="text/javascript" src="js/jquery.js"> </script>
-<script type="text/javascript" src="js/weekly.js"> </script>
+<link rel="stylesheet" href="/css/weekly.css">
+<script type="text/javascript" src="/js/jquery.js"> </script>
+<script type="text/javascript" src="/js/weekly.js"> </script>
 </head>
 <body>
 
