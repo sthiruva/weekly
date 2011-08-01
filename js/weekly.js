@@ -16,6 +16,12 @@ $(function() {
 
 function sub_settings_del()
 {
+    var url = window.location.pathname;
+    var action = $(this).attr('action');
+    $.ajax({
+        url: url + "/" + action ,
+        async: false
+    });
     var sib = $(this).parent().find('.sub-settings-select option:selected').remove();
 }
 
@@ -53,8 +59,9 @@ function sub_settings_add()
     if(pc != "")
     {
         var url = window.location.pathname;
-        var action = $(this).siblings('.sub-settings-action').val();
+        var action = $(this).attr('action');
         $.ajax({
+            data:"ms=" + pc,
             url: url + "/" + action ,
             async: false
         });

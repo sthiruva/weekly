@@ -1,6 +1,9 @@
 import bottle
 import datetime
 
+import pickle
+import os
+
 bottle.debug(True)
 
 @bottle.route('/weekly/:uname')
@@ -9,6 +12,17 @@ def weekly(uname):
 
 @bottle.route('/weekly/:uname/addpc')
 def addpc(uname):
+    return uname
+
+@bottle.route('/weekly/:uname/addms')
+def addms(uname):
+    ms = bottle.request.GET.get('ms')
+
+    if os.path.isfile("data/%s/settings.pickle" % uname):
+        print "path present load pickle"
+    else:
+        print "path not present"
+
     return uname
 
 
@@ -24,4 +38,16 @@ def server_static(filename):
 def server_static(filename):
     return bottle.static_file(filename, root='fonts/')
 
-bottle.run(host='localhost', port=8080)
+class Settings:
+    def __init__(self):
+        self.ms     = dict()
+        self.projs  = dict()
+        self.notify = dict()
+        return
+
+
+def main():
+    bottle.run(host='localhost', port=8080)
+    return
+
+main()
