@@ -47,7 +47,7 @@ class Settings:
 
 
 def main():
-    bottle.run(host='blr-lin-615.blr.arm.com', port=8080)
+    bottle.run(host='localhost', port=8080)
     return
 
 main()
