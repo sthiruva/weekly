@@ -10,9 +10,9 @@
 <div class='page'>
 
 <ul id="header-ul">
-    <li class='weekly'> <a> Weekly </a></li>
+    <li class='weekly selected'> <a> Weekly </a></li>
     <li class='older-weekly'> <a> Older weeklies </a></li>
-    <li class='settings selected'> <a> Settings </a></li>
+    <li class='settings'> <a> Settings </a></li>
     <li class='help'> <a> Help </a></li>
 </ul>
 
