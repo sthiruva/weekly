@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/weekly.css">
 <script type="text/javascript" src="/js/jquery.js"> </script>
 <script type="text/javascript" src="/js/weekly.js"> </script>
+<script type="text/javascript" src="/js/json2.js"> </script>
 </head>
 <body>
 

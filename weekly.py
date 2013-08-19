@@ -3,11 +3,16 @@ import datetime
 
 import pickle
 import os
+import json
 
 bottle.debug(True)
 
 @bottle.route('/weekly/:uname')
 def weekly(uname):
+
+    if os.path.exists("data/%s" %uname) == False:
+        os.mkdir("data/%s" % uname)
+
     return bottle.template('index')
 
 @bottle.route('/weekly/:uname/addpc')
@@ -22,6 +27,19 @@ def addms(uname):
         print "path present load pickle"
     else:
         print "path not present"
+
+    return uname
+
+@bottle.route('/weekly/:uname/save_report')
+def addms(uname):
+    report_dict_string = bottle.request.GET.get('report_dict_string')
+
+    print "report_dict_string = %s" % report_dict_string
+
+    report_dict = json.loads(report_dict_string)
+
+    print report_dict
+
 
     return uname
 

@@ -1,6 +1,20 @@
 %include header
 <div class='tab weekly selected'>
+
     <div id="report-table">
+        <div id="week-info" >
+            <select id="week" autofocus>
+            </select> 
+
+            <select id="year">
+                <option id="2013"> 2013 </option>
+                <option id="2014"> 2014 </option>
+                <option id="2015"> 2015 </option>
+                <option id="2016"> 2016 </option>
+            </select> 
+
+        </div>
+
     </div>
     <div class="clear"></div>
 
@@ -8,9 +22,9 @@
         <div class='report'>
             <div class='progress'> 
                 <h1> Progress</h1>
-                    <textarea class="progress-ta" title="Enter your progress here..."></textarea>
+                <textarea class="progress-ta" title="Enter your progress here..."></textarea>
 
-                <div title="Highlight" class="highlight-off highlight"> Highlight</div>
+                <button title="Highlight" class="highlight-off highlight"> Highlight</button>
 
             </div>
         </div>
@@ -19,14 +33,16 @@
     <div class="clear"></div>
 
     <div class="report-table-footer">
-        <div id='add-row' class="button">Add Row</div>
-        <div id='submit-report' class="button">Submit Report</div>
+        <button id='add-row' class="button">Add Row</button>
         <div class="clear"></div>
     </div>
 
     <div class='dri'> 
         <h1>Dependency/Risk/Issues</h1>
         <textarea class="dri-ta" title="Enter the dependency/risk/issues..."></textarea>
+    </div>
+    <div>
+        <button id='save-report' class="button" action="save_report">Save Report</div>
     </div>
 </div>
 <div class='tab older-weekly'>
