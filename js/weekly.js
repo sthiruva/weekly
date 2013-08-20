@@ -31,7 +31,18 @@ function week_changed()
     week_no = $('#week option:selected').val();
     year_no = $('#year option:selected').val();
 
-    // to do.. load up the result
+    // on the change of the date, make sure that we load
+    // that weeks data
+    //
+    alert("hi");
+
+    var url = window.location.pathname;
+    var action = $(this).attr('action');
+    $.ajax({
+        data:"week_no=%s&year_no=%s" % (week_no, year_no),
+        url: url + "/get_weekly",
+        async: false
+    });
 }
 
 function add_weeks()

@@ -31,17 +31,68 @@ def addms(uname):
     return uname
 
 @bottle.route('/weekly/:uname/save_report')
-def addms(uname):
+def save_report(uname):
     report_dict_string = bottle.request.GET.get('report_dict_string')
 
     print "report_dict_string = %s" % report_dict_string
 
     report_dict = json.loads(report_dict_string)
 
-    print report_dict
+    week_no = report_dict["week_no"]
+    year_no = report_dict["year_no"]
 
+    if os.path.exists("data/%s/%s" % (uname, year_no)) == False:
+        os.mkdir("data/%s/%s" % (uname, year_no))
+
+
+    fname = "data/%s/%s/%s" % (uname, year_no, week_no)
+    print fname
+    f = open(fname, "w+")
+
+    # Write the json string. 
+    # We can return this as is.. on a request
+    lines = f.write(report_dict_string)
+
+    # close.. since we are done
+    f.close()
 
     return uname
+
+@bottle.route('/weekly/:uname/get_weekly')
+def get_weekly(uname):
+    week_no = bottle.request.GET.get('week_no')
+    year_no = bottle.request.GET.get('year_no')
+
+    status = 1
+
+
+    print ("week_no = %s year_no = %s");
+
+    fname = "data/%s/%s/%s" % (uname, year_no, week_no)
+
+    # No data for that week/year
+    if os.path.exists(fname) == False:
+        status = 0
+
+
+
+    print fname
+    f = open(fname, "r")
+
+    # Write the json string. 
+    # We can return this as is.. on a request
+    lines = f.read(report_dict_string)
+
+    # close.. since we are done
+    f.close()
+
+    sdict = {
+            "status" : status,
+            "status_str" : lines
+    };
+    report = json.dumps(sdict)
+
+    return report
 
 
 @bottle.route('/css/:filename')
