@@ -65,32 +65,26 @@ def get_weekly(uname):
 
     status = 1
 
-
-    print ("week_no = %s year_no = %s");
-
     fname = "data/%s/%s/%s" % (uname, year_no, week_no)
 
     # No data for that week/year
     if os.path.exists(fname) == False:
         status = 0
+        lines  = "[]"
+    else:
 
-
-
-    print fname
-    f = open(fname, "r")
-
-    # Write the json string. 
-    # We can return this as is.. on a request
-    lines = f.read(report_dict_string)
-
-    # close.. since we are done
-    f.close()
+        f = open(fname, "r")
+        lines = f.read()
+        f.close()
 
     sdict = {
             "status" : status,
             "status_str" : lines
     };
+
     report = json.dumps(sdict)
+
+    print report
 
     return report
 

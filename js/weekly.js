@@ -2,10 +2,8 @@ var row_num = 0;
 var week_no;
 var year_no;
 $(function() {
-    add_row();
-    add_row();
-    add_row();
-    $('#add-row').click(add_row);
+
+    $('#add-row').click(add_row_handler);
     $('.highlight').live("click", highlight_toggle);
     $('.rag').live("click", update_rag);
     $('#header-ul li').live("click", switch_tab);
@@ -16,12 +14,70 @@ $(function() {
     $('.sub-settings-add').click(sub_settings_add);
     $('.sub-settings-del').click(sub_settings_del);
 
-    $('#save-report').click(save_report);
+    $('#save-report').click(save_report_handler);
+    $('#send-report').click(send_report_handler);
     $('#week').change(week_changed);
 
 
     add_weeks();
+
+    populate_weekly_data(week_no, year_no);
 });
+
+
+// This is a call back funcition that will be called when the 
+// get_weekly_data request completes.
+// We then fill the data
+function get_weekly_data_done(response, textStatus, jqXHR)
+{
+
+    var resp = JSON.parse(response);
+
+    var status     = resp.status;
+    var status_str = resp.status_str;
+
+    var ss = JSON.parse(status_str);
+    var report_array = ss.report_array;
+
+    delete_all_rows();
+
+    if(report_array == undefined){
+        add_row("", false);
+        add_row("", false);
+        add_row("", false);
+
+        $("#dri-ta-id")[0].value = "";
+
+        alert("No report found for week: " + week_no + ", " + year_no);
+
+        return;
+    }
+
+    for( var i = 0; i < report_array.length; i++) {
+        var progress  = report_array[i][0];
+        var highlight = report_array[i][1];
+
+        add_row(progress, highlight);
+    }
+
+    $("#dri-ta-id")[0].value = ss.dri;
+
+}
+
+function populate_weekly_data(week_no, year_no) 
+{
+    var url = window.location.pathname;
+    var action = $(this).attr('action');
+
+    // initiate a request to get the weekly
+    var request = $.ajax({
+        data:"week_no=" + week_no + "&year_no=" + year_no,
+        url: url + "/get_weekly",
+        async: false
+    });
+
+    request.done(get_weekly_data_done);
+}
 
 
 // On a week change, we should try and get the old weekly up 
@@ -33,16 +89,7 @@ function week_changed()
 
     // on the change of the date, make sure that we load
     // that weeks data
-    //
-    alert("hi");
-
-    var url = window.location.pathname;
-    var action = $(this).attr('action');
-    $.ajax({
-        data:"week_no=%s&year_no=%s" % (week_no, year_no),
-        url: url + "/get_weekly",
-        async: false
-    });
+    populate_weekly_data(week_no, year_no);
 }
 
 function add_weeks()
@@ -162,19 +209,52 @@ function update_rag()
     $(this).css('background-color', color);
 }
 
+function delete_all_rows()
+{
+    for(var i = 0; i < row_num; i++)
+    {
+        var rdiv = $('#row-' + i);
+        rdiv.remove();
 
-function add_row()
+    }
+
+    row_num = 0;
+}
+
+function add_row_handler()
+{
+    add_row("", false);
+}
+
+function add_row(progress, highlight)
 {
     var r = $('#hiddenrow').clone();
     var t = $('#report-table').append(r);
     r.show();
     r.attr('id', 'row-' + row_num);
+
+    r.find('.progress-ta').val(progress);
+
+    if(highlight){
+        r.find('.highlight').removeClass('highlight-off');
+        r.find('.highlight').addClass('highlight-on');
+    }
+    else{
+        r.find('.highlight').removeClass('highlight-on');
+        r.find('.highlight').addClass('highlight-off');
+
+    }
     row_num++;
+}
+
+function save_report_handler()
+{
+    save_report(false);
 }
 
 // TODO: 
 // 1. get the week details
-function save_report()
+function save_report(send)
 {
     var all_progress = $("#report-table .progress");
 
@@ -187,17 +267,19 @@ function save_report()
         report_lines.push([status_line, highlight]);
     }
 
+    var dri = $('#dri-ta-id')[0].value;
 
     var report_dict = {
         "report_array"  : report_lines,
         "week_no"       : week_no,
-        "year_no"       : year_no
+        "year_no"       : year_no,
+        "dri"           : dri
     }
 
     report_dict_string = JSON.stringify(report_dict);
 
     var url = window.location.pathname;
-    var action = $(this).attr('action');
+    var action = send == true? "send_report" : "save_report";
     $.ajax({
         data: "report_dict_string=" + report_dict_string,
         url: url + "/" + action ,
@@ -205,6 +287,11 @@ function save_report()
     });
 
 
+}
+
+function send_report_handler()
+{
+    save_report(true);
 }
 
 

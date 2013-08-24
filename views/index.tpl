@@ -39,10 +39,14 @@
 
     <div class='dri'> 
         <h1>Dependency/Risk/Issues</h1>
-        <textarea class="dri-ta" title="Enter the dependency/risk/issues..."></textarea>
+        <textarea id='dri-ta-id' class="dri-ta" title="Enter the dependency/risk/issues..."></textarea>
     </div>
     <div>
-        <button id='save-report' class="button" action="save_report">Save Report</div>
+        <button id='save-report' class="button" action="save_report">Save Report</button>
+    </div>
+
+    <div>
+        <button id='send-report' class="button" action="send_report">Send Report</button>
     </div>
 </div>
 <div class='tab older-weekly'>
