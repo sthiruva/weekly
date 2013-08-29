@@ -5,6 +5,8 @@ import pickle
 import os
 import json
 
+import smtplib
+
 bottle.debug(True)
 
 @bottle.route('/weekly/:uname')
@@ -58,6 +60,47 @@ def save_report(uname):
 
     return uname
 
+@bottle.route('/weekly/:uname/send_report')
+def send_report(uname):
+
+    # save the report first
+    report_dict = save_report(uname)
+
+    report_dict_string = bottle.request.GET.get('report_dict_string')
+    report_dict        = json.loads(report_dict_string)
+
+    print report_dict
+
+    report_array = report_dict['report_array']
+
+    # process the highlights first
+
+    message = ""
+    message = message + "Highlights\n"
+    message = message + "==========\n"
+
+    count = 1
+    for (rp, hl) in report_array:
+        count_str = "%d. " % count 
+        if hl == True:
+            message = message + count_str + rp + "\n"
+            count = count + 1
+
+    count = 1
+    message = message + "\n\n"
+    message = message + "Details\n"
+    message = message + "=======\n"
+    for (rp, hl) in report_array:
+        count_str = "%d. " % count 
+        message = message + count_str + rp + "\n"
+        count = count + 1
+
+    # this should come from a config file
+    sendemail( 'test@localhost', ['shathi01@test'], [], "Week Report", message)
+
+
+    return
+
 @bottle.route('/weekly/:uname/get_weekly')
 def get_weekly(uname):
     week_no = bottle.request.GET.get('week_no')
@@ -101,6 +144,20 @@ def server_static(filename):
 def server_static(filename):
     return bottle.static_file(filename, root='fonts/')
 
+
+def sendemail(from_addr, to_addr_list, cc_addr_list,
+              subject, message,
+              smtpserver='localhost'):
+    header  = 'From: %s\n' % from_addr
+    header += 'To: %s\n' % ','.join(to_addr_list)
+    header += 'Cc: %s\n' % ','.join(cc_addr_list)
+    header += 'Subject: %s\n\n' % subject
+    message = header + message
+  
+    server = smtplib.SMTP(smtpserver)
+    problems = server.sendmail(from_addr, to_addr_list, message)
+    server.quit()
+
 class Settings:
     def __init__(self):
         self.ms     = dict()
@@ -110,7 +167,7 @@ class Settings:
 
 
 def main():
-    bottle.run(host='localhost', port=8080)
+    bottle.run(host='blr-lin-615.blr.arm.com', port=8080)
     return
 
 main()
