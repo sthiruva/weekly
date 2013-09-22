@@ -374,6 +374,11 @@ div.selected {
     margin-top: 5px;
 }
 
+#send-consolidated-report {
+    float: right;
+    margin-top: 5px;
+}
+
 select {
     padding: 5px;
 }

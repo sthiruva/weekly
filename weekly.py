@@ -69,13 +69,18 @@ def send_report(uname):
     report_dict_string = bottle.request.GET.get('report_dict_string')
     report_dict        = json.loads(report_dict_string)
 
-    print report_dict
 
     report_array = report_dict['report_array']
-
-    # process the highlights first
+    dri          = report_dict['dri']
 
     message = ""
+
+    # process the DRI
+    message = message + "DRI\n"
+    message = message + "===\n"
+    message = message + dri + "\n\n"
+
+    # process the highlights
     message = message + "Highlights\n"
     message = message + "==========\n"
 
@@ -96,8 +101,14 @@ def send_report(uname):
         count = count + 1
 
     # this should come from a config file
-    sendemail( 'test@localhost', ['shathi01@test'], [], "Week Report", message)
+    from_user = settings["members"][uname]
+    to        = []
 
+    members = settings['members']
+    for (name, email) in members.items() :
+        to.append(email)
+
+    sendemail( from_user, to, [], "Week Report", message)
 
     return
 
@@ -144,6 +155,78 @@ def server_static(filename):
 def server_static(filename):
     return bottle.static_file(filename, root='fonts/')
 
+@bottle.route('/weekly/:uname/send_consolidated_report')
+def send_consolidated_report(uname):
+
+    global settings
+
+
+    week_no = bottle.request.GET.get('week_no')
+    year_no = bottle.request.GET.get('year_no')
+
+    print "send_consolidated_report :: week_no = %s year_no = %s"% (week_no, year_no)
+
+    not_found  = ""
+
+    dri        = ""
+    dri        = dri + "DRI\n"
+    dri        = dri + "===\n"
+
+    highlights = ""
+    highlights = highlights + "Highlights\n"
+    highlights = highlights + "==========\n"
+
+
+    details = ""
+    details    = details + "Details\n"
+    details    = details + "=======\n"
+
+    members = settings['members']
+
+    for (name, email) in members.items() :
+
+        fname = "data/%s/%s/%s" % (name, year_no, week_no)
+
+        if os.path.exists(fname) : 
+            f = open( fname, "r")
+            lines = f.read()
+            f.close()
+        else:
+            not_found = not_found + "%s's Weekly report not found \n"
+            continue
+
+        report_dict  = json.loads(lines)
+        report_array = report_dict['report_array']
+        dri          = dri + report_dict['dri'] + "\n"
+
+        highlights = highlights + name + "\n"
+        count = 1
+        for (rp, hl) in report_array:
+            count_str = "%d. " % count 
+            if hl == True:
+                highlights = highlights + count_str + rp + "\n"
+                count = count + 1
+        highlights = highlights + "\n"
+
+        details = details + name + "\n"
+        count = 1
+        for (rp, hl) in report_array:
+            count_str = "%d. " % count 
+            details = details + count_str + rp + "\n"
+            count = count + 1
+
+        details = details + "\n"
+
+    message = dri + "\n" + highlights + "\n" + details + "\n" + not_found
+
+
+    from_user = settings["members"][uname]
+    to        = [from_user]
+    sendemail( from_user, to, [], "Week Report", message)
+
+    return
+
+
 
 def sendemail(from_addr, to_addr_list, cc_addr_list,
               subject, message,
@@ -167,7 +250,18 @@ class Settings:
 
 
 def main():
-    bottle.run(host='blr-lin-615.blr.arm.com', port=8080)
+
+    global settings
+
+    f = open("data/settings.json", "r")
+    lines = f.read()
+    f.close()
+
+    settings = json.loads(lines)
+
+    bottle.run(host=settings["hostname"], port=8080)
+
+
     return
 
 main()

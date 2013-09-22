@@ -48,6 +48,11 @@
     <div>
         <button id='send-report' class="button" action="send_report">Send Report</button>
     </div>
+
+    <div class="clear"></div>
+    <div>
+        <button id='send-consolidated-report' class="button" action="send_consolidate_report">Send Consolidated Report</button>
+    </div>
 </div>
 <div class='tab older-weekly'>
 </div>

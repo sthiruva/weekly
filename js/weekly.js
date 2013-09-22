@@ -16,6 +16,7 @@ $(function() {
 
     $('#save-report').click(save_report_handler);
     $('#send-report').click(send_report_handler);
+    $('#send-consolidated-report').click(send_consolidated_report_handler);
     $('#week').change(week_changed);
 
 
@@ -292,6 +293,26 @@ function save_report(send)
 function send_report_handler()
 {
     save_report(true);
+}
+
+function send_consolidate_report_done()
+{
+    alert("Consolidated report sent!");
+}
+
+function send_consolidated_report_handler()
+{
+    var url = window.location.pathname;
+    var action = $(this).attr('action');
+
+    // initiate a request to get the weekly
+    var request = $.ajax({
+        data:"week_no=" + week_no + "&year_no=" + year_no,
+        url: url + "/send_consolidated_report",
+        async: false
+    });
+
+    request.done(send_consolidate_report_done);
 }
 
 
