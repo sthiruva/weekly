@@ -21,6 +21,7 @@ $(function() {
 
 
     add_weeks();
+    add_years();
 
     populate_weekly_data(week_no, year_no);
 });
@@ -110,6 +111,27 @@ function add_weeks()
 
     //set the current week as selected
     sel.val(week_no).attr("selected", "selected");
+}
+
+function add_years()
+{
+
+    var d = Date();
+    // bad global var
+    year_no =  getWeekNumber(d)[0];
+    week_no =  getWeekNumber(d)[1];
+
+    var sel = $('#year');
+
+    // This is the year we started the weekly business!
+    var year = 2013;
+    for(var i = year; i < (year + 10); i++)
+    {
+        sel.append("<option value='" + i + "'> " + i + "  </option>")
+    }
+
+    //set the current week as selected
+    sel.val(year_no).attr("selected", "selected");
 }
 
 function sub_settings_del()
@@ -286,8 +308,6 @@ function save_report(send)
         url: url + "/" + action ,
         async: false
     });
-
-
 }
 
 function send_report_handler()

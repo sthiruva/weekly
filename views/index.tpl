@@ -7,10 +7,6 @@
             </select> 
 
             <select id="year">
-                <option id="2013"> 2013 </option>
-                <option id="2014"> 2014 </option>
-                <option id="2015"> 2015 </option>
-                <option id="2016"> 2016 </option>
             </select> 
 
         </div>
