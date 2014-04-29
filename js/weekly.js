@@ -1,14 +1,16 @@
 var row_num = 0;
 var week_no;
 var year_no;
-$(function() {
+
+function ready_handler()
+{
 
     $('#add-row').click(add_row_handler);
-    $('.highlight').live("click", highlight_toggle);
-    $('.rag').live("click", update_rag);
-    $('#header-ul li').live("click", switch_tab);
+    $(document).on("click", '.highlight',highlight_toggle);
+    $(document).on("click", '.rag', update_rag);
+    $(document).on("click", '#header-ul li', switch_tab);
 
-    $('.sub-settings-option').live("click", show_sub_settings_del);
+    $(document).on("click", '.sub-settings-option', show_sub_settings_del);
     $('.sub-settings-input').click(show_sub_settings_add);
     $('.sub-settings-input').bind('keypress', trigger_sub_settings_add);
     $('.sub-settings-add').click(sub_settings_add);
@@ -24,7 +26,9 @@ $(function() {
     add_years();
 
     populate_weekly_data(week_no, year_no);
-});
+}
+
+$(ready_handler);
 
 
 // This is a call back funcition that will be called when the 
@@ -303,11 +307,16 @@ function save_report(send)
 
     var url = window.location.pathname;
     var action = send == true? "send_report" : "save_report";
-    $.ajax({
+    var request = $.ajax({
         data: "report_dict_string=" + report_dict_string,
         url: url + "/" + action ,
-        async: false
+        success: save_report_done
     });
+}
+
+function save_report_done(data, textStatus, jqXHR){
+
+    alert(data);
 }
 
 function send_report_handler()

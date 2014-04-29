@@ -33,7 +33,7 @@ def addms(uname):
     return uname
 
 @bottle.route('/weekly/:uname/save_report')
-def save_report(uname):
+def save_report(uname, respond = True):
     report_dict_string = bottle.request.GET.get('report_dict_string')
 
     print "report_dict_string = %s" % report_dict_string
@@ -58,13 +58,17 @@ def save_report(uname):
     # close.. since we are done
     f.close()
 
+    if respond == True:
+        print "Report Saved"
+        return "Report Saved"
+
     return uname
 
 @bottle.route('/weekly/:uname/send_report')
 def send_report(uname):
 
     # save the report first
-    report_dict = save_report(uname)
+    report_dict = save_report(uname, False)
 
     report_dict_string = bottle.request.GET.get('report_dict_string')
     report_dict        = json.loads(report_dict_string)
@@ -101,16 +105,17 @@ def send_report(uname):
         count = count + 1
 
     # this should come from a config file
-    from_user = settings["members"][uname]
+    from_user = settings["members"][uname]["email"]
     to        = []
 
     members = settings['members']
-    for (name, email) in members.items() :
+    for key in members.keys() :
+        email = members[key]["email"]
         to.append(email)
 
     sendemail( from_user, to, [], "Week Report", message)
 
-    return
+    return "Report Sent"
 
 @bottle.route('/weekly/:uname/get_weekly')
 def get_weekly(uname):
@@ -183,16 +188,21 @@ def send_consolidated_report(uname):
 
     members = settings['members']
 
-    for (name, email) in members.items() :
+    for key in members.keys() :
 
-        fname = "data/%s/%s/%s" % (name, year_no, week_no)
+        print key
+
+        name  = members[key]["name"]
+        email = members[key]["email"]
+
+        fname = "data/%s/%s/%s" % (key, year_no, week_no)
 
         if os.path.exists(fname) : 
             f = open( fname, "r")
             lines = f.read()
             f.close()
         else:
-            not_found = not_found + "%s's Weekly report not found \n"
+            not_found = not_found + "%s's Weekly report not found \n" % (name)
             continue
 
         report_dict  = json.loads(lines)
@@ -220,7 +230,7 @@ def send_consolidated_report(uname):
     message = dri + "\n" + highlights + "\n" + details + "\n" + not_found
 
 
-    from_user = settings["members"][uname]
+    from_user = settings["members"][uname]["email"]
     to        = [from_user]
     sendemail( from_user, to, [], "Week Report", message)
 
