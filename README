@@ -1,0 +1,16 @@
+Intro
+=====
+
+A silly tool to track your weeklies.
+To start the server run:
+
+python weekly.py
+
+
+To access the server go to:
+http://localhost:8080/weekly/asdf
+
+No go figure out the rest!
+
+
+

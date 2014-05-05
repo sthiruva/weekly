@@ -1,0 +1,8 @@
+{
+    "hostname" : "localhost",
+    "owner"    : "asdf@gmail.com",
+    "members"  : {
+                    "asdf" : "asdf@gmail.com"
+                 }
+}
+
