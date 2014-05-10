@@ -1,0 +1,4 @@
+data/*
+*.pyc
+.nfs*
+.gitignore
